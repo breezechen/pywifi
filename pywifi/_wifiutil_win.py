@@ -347,6 +347,11 @@ class WifiUtil():
         profile_data['protected'] = 'false'
         profile_data['profile_name'] = params.ssid
 
+        if params.auto:
+            profile_data['mode'] = 'auto'
+        else:
+            profile_data['mode'] = 'manual'
+
         xml = """<?xml version="1.0"?>
         <WLANProfile xmlns="http://www.microsoft.com/networking/WLAN/profile/v1">
             <name>{profile_name}</name>
@@ -356,7 +361,7 @@ class WifiUtil():
                 </SSID>
             </SSIDConfig>
             <connectionType>ESS</connectionType>
-            <connectionMode>manual</connectionMode>
+            <connectionMode>{mode}</connectionMode>
             <MSM>
                 <security>
                     <authEncryption>
